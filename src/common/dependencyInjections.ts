@@ -1,5 +1,5 @@
 import { Environment } from "../environment";
-import { AppDependencies } from "../interfaces/dependencyInterfaces";
+import type { AppDependencies } from "../interfaces/dependencyInterfaces";
 import { GlobalErrorHandlerMiddleware } from "../middlewares/globalErrorHandler.middleware";
 import { AppRouter } from "../router";
 import { LoggerUtil } from "../utils/logger.util";

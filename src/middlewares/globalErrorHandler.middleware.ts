@@ -1,12 +1,11 @@
 import type { NextFunction, Request, Response } from "express";
-import type { Logger } from "winston";
 import type { CommonDependencies } from "../common/commonDependencyInjector";
 import { CommonDependencyInjector } from "../common/commonDependencyInjector";
 
 interface GlobalErrorHandlerMiddlewareDependencies extends CommonDependencies {}
 
 export class GlobalErrorHandlerMiddleware extends CommonDependencyInjector {
-  private logger: Logger;
+  private logger;
 
   constructor(
     globalErrorHandlerMiddlewareDependencies: GlobalErrorHandlerMiddlewareDependencies

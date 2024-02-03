@@ -1,5 +1,4 @@
 import dotenv from "dotenv";
-import type { Logger } from "winston";
 import type { CommonDependencies } from "./common/commonDependencyInjector";
 import { CommonDependencyInjector } from "./common/commonDependencyInjector";
 
