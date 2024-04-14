@@ -36,6 +36,14 @@ export class App extends CommonDependencyInjector {
     app.use(compression());
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
+    app.use((request, response, nextFunction) => {
+      const timestamp = new Date().toISOString();
+      const method = request.method;
+      const url = request.url;
+
+      this.logger.info(`[${timestamp}] ${method} ${url}`);
+      nextFunction();
+    });
 
     const router = this.appRouter.registerRoutes();
     app.use("/", router);
