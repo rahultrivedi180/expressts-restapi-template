@@ -1,33 +1,35 @@
 import dotenv from "dotenv";
-import type { CommonDependencies } from "./common/commonDependencyInjector";
-import { CommonDependencyInjector } from "./common/commonDependencyInjector";
+import { CommonDependencyInjector, type CommonDependencies } from "./common/commonDependencyInjector";
 
 export interface EnvironmentConfig {
   host: string;
   port: number | string;
 }
 
-interface EnvironmentDependencies extends CommonDependencies {}
+interface EnvironmentDependencies extends CommonDependencies, Partial<EnvironmentConfig> {}
 
 export class Environment extends CommonDependencyInjector {
   private logger;
   private environment?: EnvironmentConfig = undefined;
 
   constructor(environmentDependencies: EnvironmentDependencies) {
-    const { logger } = environmentDependencies;
+    const { logger, host, port } = environmentDependencies;
     super({ logger });
     this.logger = logger;
-    this.initializeEnvironment();
 
+    this.initializeEnvironment({host, port});
     this.getEnvironmentConfig = this.getEnvironmentConfig.bind(this);
   }
 
-  private initializeEnvironment() {
+  private initializeEnvironment(params: Partial<EnvironmentConfig>) {
     dotenv.config();
 
+    const HOST = process.env['HOST'] || params.host || "localhost";
+    const PORT = process.env['PORT'] || params.port || "3002";
+
     this.environment = {
-      host: process.env["HOST"] || "localhost",
-      port: process.env["PORT"] || "3002",
+      host: HOST,
+      port: PORT,
     };
 
     this.logger.info("The environment variables have been initialized.");

@@ -5,6 +5,7 @@ import { App } from "../src/app";
 import { GlobalErrorHandlerMiddleware } from "../src/middlewares/globalErrorHandler.middleware";
 import { AppRouter } from "../src/router";
 import { LoggerUtil } from "../src/utils/logger.util";
+import { ResponseUtil } from "../src/utils/response.util";
 
 describe("Integration Tests", () => {
   let appInstance: Express;
@@ -13,8 +14,9 @@ describe("Integration Tests", () => {
     const logger = new LoggerUtil("integration-test").logger;
     const globalErrorHandlerMiddleware = new GlobalErrorHandlerMiddleware({
       logger,
+      ResponseUtil
     });
-    const appRouter = new AppRouter({ logger });
+    const appRouter = new AppRouter({ logger, routers: [] });
     const host = "0.0.0.0";
     const port = 8080;
 
