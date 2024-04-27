@@ -14,7 +14,7 @@ This template serves as a foundation for building scalable and maintainable REST
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/steverogers180/expressts-restapi-template.git
+   git clone https://github.com/rahultrivedi180/expressts-restapi-template.git
    ```
 
 2. Install dependencies:
